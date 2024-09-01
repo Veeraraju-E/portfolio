@@ -1,0 +1,138 @@
+div.canvas {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+div.container {
+  margin: 20px;
+  margin-bottom: 35px;
+}
+
+div.publication {
+  margin-bottom: 20px;
+}
+
+#avatar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+  border-radius: 100%;
+  box-shadow: 0 0 0 0.3em #ddd;
+}
+
+a {
+  color: #0055aa;
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: #e37222;
+  text-decoration: none;
+}
+
+body,
+td,
+th,
+tr,
+p,
+a {
+  font-family: "TeXGyrePagella", "Palatino Linotype", "Book Antiqua", Palatino,
+    serif;
+  font-size: 15px;
+}
+
+.quote {
+  font-style: italic;
+  color: grey;
+  text-align: center !important;
+}
+
+name {
+  font-family: "TeXGyrePagella", "Palatino Linotype", "Book Antiqua", Palatino,
+    serif;
+  font-size: 40px;
+}
+
+heading {
+  font-family: "TeXGyrePagella", "Palatino Linotype", "Book Antiqua", Palatino,
+    serif;
+  font-size: 22px;
+}
+
+papertitle {
+  font-family: "TeXGyrePagella", "Palatino Linotype", "Book Antiqua", Palatino,
+    serif;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+li:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+span.venue {
+  color: #0055aa;
+  font-weight: bold;
+}
+
+span.highlight {
+  /* color: #bb2222; */
+  color: #36a066;
+  font-weight: bold;
+}
+
+@media screen {
+  /* Text contrast */
+  html {
+    text-shadow: 0 0 0 !important;
+  }
+  /* Full screen */
+  *:-webkit-full-screen,
+  *:-webkit-full-screen * {
+    -webkit-filter: none !important;
+  }
+  /* Page background */
+  html {
+    background: rgb(255, 255, 255) !important;
+  }
+}
+
+.tab-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+
+.tab-item {
+  flex: 1;
+  padding: 15px 0px;
+  cursor: pointer;
+  border-right: solid #ddd;
+  text-align: center;
+  margin-right: -1px;
+  background-color: #f4f4f4;
+  transition: background-color 0.05s ease;
+}
+.tab-item:last-child {
+  margin-right: 0;
+  border-right: 0;
+}
+.tab-item:hover {
+  background-color: #ddd;
+}
+
+.tab-item.active {
+  font-weight: bold;
+  background-color: #ddd;
+  color: white;
+}
+.tab-content {
+  display: none;
+  margin-top: 20px;
+}
+.tab-content.active {
+  display: block;
+}
