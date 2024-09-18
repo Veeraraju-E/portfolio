@@ -136,3 +136,17 @@ span.highlight {
 .tab-content.active {
   display: block;
 }
+
+#email {
+  cursor: pointer;
+  transition: opacity 0.5s ease-in-out; /* Transition for smooth fade effect */
+  display: inline-block;
+}
+
+.fade-out {
+  opacity: 0; /* Fades out */
+}
+
+.fade-in {
+  opacity: 1; /* Fades in */
+}

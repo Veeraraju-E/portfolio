@@ -20,7 +20,13 @@
         <img id="avatar" src="assets/veerarajuelluru.jpg" />
         <p align="center">
           <name>Veeraraju Elluru</name><br />
-          b22cs080 [at] iitj [dot] ac [dot] in
+          <span
+            id="email"
+            style="cursor: pointer"
+            class="fade-in"
+            onclick="toggleEmail()"
+            >0c8b2si@ti2j.ic0a</span
+          >
         </p>
         <p class="quote">"Counting my first 10000 hours in solving AI."</p>
         <p>
@@ -215,6 +221,35 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+      var isScrambled = true;
+
+      function toggleEmail() {
+        var emailSpan = document.getElementById("email");
+
+        // Add fade-out effect
+        emailSpan.classList.remove("fade-in");
+        emailSpan.classList.add("fade-out");
+
+        // Wait for the fade-out to complete, then toggle email and fade-in
+        setTimeout(function () {
+          if (isScrambled) {
+            // Unscramble the email
+            emailSpan.textContent = "b22cs080@iitj.ac.in";
+          } else {
+            // Scramble the email
+            emailSpan.textContent = "0c8b2si@ti2j.ic0a";
+          }
+
+          isScrambled = !isScrambled;
+
+          // Add fade-in effect
+          emailSpan.classList.remove("fade-out");
+          emailSpan.classList.add("fade-in");
+        }, 500); // Match this timeout to the transition duration (0.5s)
+      }
+    </script>
+
     <script>
       function showSection(sectionId, tabElement) {
         $(".tab-content").removeClass("active");
