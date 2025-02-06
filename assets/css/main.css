@@ -150,3 +150,7 @@ span.highlight {
 .fade-in {
   opacity: 1; /* Fades in */
 }
+
+h3 {
+  font-family: "Source Code Pro", monospace;
+}
