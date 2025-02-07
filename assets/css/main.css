@@ -158,6 +158,7 @@ h3 {
 .news-section {
   height: 300px; /* Adjust the height as needed */
   overflow-y: scroll;
-  border: 1px solid #ccc 0px; /* Optional: Add a border for better visibility */
+  border-top: 1px solid #ccc; /* Optional: Add a border for better visibility */
+  border-bottom: 1px solid #ccc; /* Optional: Add a border for better visibility */
   padding: 10px; /* Optional: Add padding for better spacing */
 }
