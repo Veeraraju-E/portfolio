@@ -154,3 +154,10 @@ span.highlight {
 h3 {
   font-family: "Source Code Pro", monospace;
 }
+
+.news-section {
+  height: 300px; /* Adjust the height as needed */
+  overflow-y: scroll;
+  border: 1px solid #ccc 0px; /* Optional: Add a border for better visibility */
+  padding: 10px; /* Optional: Add padding for better spacing */
+}
