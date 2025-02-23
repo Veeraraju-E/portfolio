@@ -162,3 +162,69 @@ h3 {
   border-bottom: 1px solid #ccc; /* Optional: Add a border for better visibility */
   padding: 10px; /* Optional: Add padding for better spacing */
 }
+.menu-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000;
+  padding: 10px;
+}
+
+.menu-line {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+.side-panel {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  z-index: 1001;
+}
+
+.side-panel.active {
+  right: 0;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.panel-content {
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panel-content a {
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.panel-content a:hover {
+  color: #0055aa;
+}
+
+.content-section {
+  display: none;
+}
+
+.content-section.active {
+  display: block;
+}

@@ -19,348 +19,351 @@
   </head>
 
   <body>
-    <div class="canvas">
-      <div class="container">
-        <img id="avatar" src="assets/images/veerarajuelluru.jpg" />
-        <p align="center">
-          <name>Veeraraju Elluru</name><br />
-          <span
-            id="email"
-            style="cursor: pointer"
-            class="fade-in"
-            onclick="toggleEmail()"
-            >0c8b2si@ti2j.ic0a</span
-          >
-        </p>
-        <p class="quote">"Counting my first 10000 hours in solving AI."</p>
-        <p>
-          I am a Junior pursuing Computer Science and Engineering at the Indian
-          Institute of Technology, Jodhpur. I love AI research and Math. My main
-          areas of interest are <b>Generative Modeling</b> for Computer Vision -
-          GANs, diffusion models, scene understanding, MoCap; and
-          <b>Privacy-respecting multi-modal systems</b>. I am extremely grateful
-          to be jointly mentored by
-          <a
-            href="https://sites.google.com/view/shivangagarwal/home"
-            target="_blank"
-            >Dr. Shivang Agarwal</a
-          >
-          and
-          <a href="http://home.iitj.ac.in/~mvatsa/" target="_blank"
-            >Dr. Mayank Vatsa</a
-          >.
-        </p>
-        <p>
-          <span class="highlight"
-            >I am keenly pursuing opportunities to engage in pioneering research
-            alongside <i>Vision</i>ary teams committed to AI research-driven
-            innovation.</span
-          >
-        </p>
-        <p align="center">
-          <a href="mailto:b22cs080@iitj.ac.in">Email</a>
-          &nbsp;/&nbsp;
-          <a
-            href="https://www.linkedin.com/in/veeraraju-elluru/"
-            target="_blank"
-            >LinkedIn</a
-          >
-          &nbsp;/&nbsp;
-          <a href="https://github.com/Veeraraju-E" target="_blank">GitHub</a
-          >&nbsp;/&nbsp;
-          <a href="ElluruVeeraraju_CV.pdf" target="_blank">CV</a>
-        </p>
+    <div class="menu-button" onclick="toggleMenu()">
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+    </div>
+
+    <div class="side-panel" id="sidePanel">
+      <div class="close-button" onclick="toggleMenu()">×</div>
+      <div class="panel-content">
+        <a href="#home" onclick="showContent('home')">Home</a>
+        <a href="#projects" onclick="showContent('projects')">Projects</a>
+        <a href="#blogs" onclick="showContent('blogs')">Blogs</a>
       </div>
-      <div class="container">
-        <heading>News</heading>
-        <div class="news-section">
-          <div class="container">
-            <ul>
-              <!-- <li>
+    </div>
+    <div id="homeSection" class="content-section active">
+      <div class="canvas">
+        <div class="container">
+          <img id="avatar" src="assets/images/veerarajuelluru.jpg" />
+          <p align="center">
+            <name>Veeraraju Elluru</name><br />
+            <span
+              id="email"
+              style="cursor: pointer"
+              class="fade-in"
+              onclick="toggleEmail()"
+              >0c8b2si@ti2j.ic0a</span
+            >
+          </p>
+          <p class="quote">"Counting my first 10000 hours in solving AI."</p>
+          <p>
+            I am a Junior pursuing Computer Science and Engineering at the
+            Indian Institute of Technology, Jodhpur. I love AI research and
+            Math. My main areas of interest are <b>Generative Modeling</b> for
+            Computer Vision - GANs, diffusion models, scene understanding,
+            MoCap; and <b>Privacy-respecting multi-modal systems</b>. I am
+            extremely grateful to be jointly mentored by
+            <a
+              href="https://sites.google.com/view/shivangagarwal/home"
+              target="_blank"
+              >Dr. Shivang Agarwal</a
+            >
+            and
+            <a href="http://home.iitj.ac.in/~mvatsa/" target="_blank"
+              >Dr. Mayank Vatsa</a
+            >.
+          </p>
+          <p>
+            <span class="highlight"
+              >I am keenly pursuing opportunities to engage in pioneering
+              research alongside <i>Vision</i>ary teams committed to AI
+              research-driven innovation.</span
+            >
+          </p>
+          <p align="center">
+            <a href="mailto:b22cs080@iitj.ac.in">Email</a>
+            &nbsp;/&nbsp;
+            <a
+              href="https://www.linkedin.com/in/veeraraju-elluru/"
+              target="_blank"
+              >LinkedIn</a
+            >
+            &nbsp;/&nbsp;
+            <a href="https://github.com/Veeraraju-E" target="_blank">GitHub</a
+            >&nbsp;/&nbsp;
+            <a href="ElluruVeeraraju_CV.pdf" target="_blank">CV</a>
+          </p>
+        </div>
+        <div class="container">
+          <heading>News</heading>
+          <div class="news-section">
+            <div class="container">
+              <ul>
+                <!-- <li>
                 <b>Summer, 2025</b>: Research Intern @ UCR. PI -
                 <a href="https://yinglunz.com/" target="_blank">Yinglun Zhu</a>
               </li> -->
-              <!-- <li>
+                <!-- <li>
                 <b>January, 2025</b>: WARP Mentor - Building a multimodal
                 (Audio-Vision) Agent that can provide real-time stress
                 counseling
               </li> -->
-              <li>
-                <b>February, 2025</b>: First Author paper accpeted at USPLF
-                2025.
-              </li>
-              <li>
-                <b>January, 2025</b>: TAing CSL1020 - Introduction to CS, S25.
-                Instructor - Dr. Mayank Vatsa
-              </li>
-              <li>
-                <b>November, 2024</b>: Joining the
-                <a href="https://iab-rubric.org/" target="_blank"
-                  >Image Analytics and Biometrics Lab</a
-                >
-                as an undergraduate RA, where I am working on "Machine
-                Unlearning for Multi-modal systems".<br />PI - Dr. Mayank Vatsa,
-                Co-PI - Dr. Shivang Agarwal
-              </li>
-              <li>
-                <b>October, 2024</b>: Building flow-based generative models for
-                "Fast Shower Simulation (FastSim)" in High Energy Physics for
-                <b>CERN</b>. <br />Mentors -
-                <a
-                  href="https://sites.google.com/iitj.ac.in/dmishra"
-                  target="_blank"
-                  >Dr. Deepak Mishra</a
-                >,
-                <a href="https://www.linkedin.com/in/piyush555/" target="_blank"
-                  >Piyush Raikwar</a
-                >,
-                <a
-                  href="https://gitlab.cern.ch/users/pmckeown/activity"
-                  target="_blank"
-                  >Peter McKeown</a
-                >
-              </li>
-              <li>
-                <b>Summer, 2024</b>: Summer Research Intern @
-                <a
-                  href="https://digitalag.illinois.edu/education/reu-program/students-and-alumni/"
-                  >Center for Digital Agriculture</a
-                >, UIUC. Worked on "Towards Unsupervised Latent Representations
-                for Cattle Image Segmentation". <br />Mentor -
-                <a
-                  href="https://scholar.google.com/citations?hl=pt-BR&user=87_0v9kAAAAJ&view_op=list_works&sortby=pubdate"
-                  >Dr. Tiago Bresolin</a
-                >.
-              </li>
-              <li>
-                <b>January, 2024</b>: Assistant Head (AI and ML Events) -
-                Prometeo '24 (IIT Jodhpur's annual, national level, technical
-                festival). Gathered 2000+ registrations, gave away prizes worth
-                INR 100000.
-              </li>
-              <li>
-                <b>Summer, 2023</b>: Summer Intern (Machine Learning and Data
-                Analyst) @
-                <a href="https://fluxgen.com/">Fluxgen Technologies</a>
-              </li>
-              <li>
-                <b>February, 2023</b>: Volunteered at
-                <a href="https://2023.agileindia.org/" target="_blank"
-                  >Agile India 2023</a
-                >, Bangalore
-                <!-- - Asia's Premier & Leading Product Engineering
+                <li>
+                  <b>February, 2025</b>: First Author paper accpeted at USPLF
+                  2025.
+                </li>
+                <li>
+                  <b>January, 2025</b>: TAing CSL1020 - Introduction to CS, S25.
+                  Instructor - Dr. Mayank Vatsa
+                </li>
+                <li>
+                  <b>November, 2024</b>: Joining the
+                  <a href="https://iab-rubric.org/" target="_blank"
+                    >Image Analytics and Biometrics Lab</a
+                  >
+                  as an undergraduate RA, where I am working on "Machine
+                  Unlearning for Multi-modal systems".<br />PI - Dr. Mayank
+                  Vatsa, Co-PI - Dr. Shivang Agarwal
+                </li>
+                <li>
+                  <b>October, 2024</b>: Building flow-based generative models
+                  for "Fast Shower Simulation (FastSim)" in High Energy Physics
+                  for <b>CERN</b>. <br />Mentors -
+                  <a
+                    href="https://sites.google.com/iitj.ac.in/dmishra"
+                    target="_blank"
+                    >Dr. Deepak Mishra</a
+                  >,
+                  <a
+                    href="https://www.linkedin.com/in/piyush555/"
+                    target="_blank"
+                    >Piyush Raikwar</a
+                  >,
+                  <a
+                    href="https://gitlab.cern.ch/users/pmckeown/activity"
+                    target="_blank"
+                    >Peter McKeown</a
+                  >
+                </li>
+                <li>
+                  <b>Summer, 2024</b>: Summer Research Intern @
+                  <a
+                    href="https://digitalag.illinois.edu/education/reu-program/students-and-alumni/"
+                    >Center for Digital Agriculture</a
+                  >, UIUC. Worked on "Towards Unsupervised Latent
+                  Representations for Cattle Image Segmentation". <br />Mentor -
+                  <a
+                    href="https://scholar.google.com/citations?hl=pt-BR&user=87_0v9kAAAAJ&view_op=list_works&sortby=pubdate"
+                    >Dr. Tiago Bresolin</a
+                  >.
+                </li>
+                <li>
+                  <b>January, 2024</b>: Assistant Head (AI and ML Events) -
+                  Prometeo '24 (IIT Jodhpur's annual, national level, technical
+                  festival). Gathered 2000+ registrations, gave away prizes
+                  worth INR 100000.
+                </li>
+                <li>
+                  <b>Summer, 2023</b>: Summer Intern (Machine Learning and Data
+                  Analyst) @
+                  <a href="https://fluxgen.com/">Fluxgen Technologies</a>
+                </li>
+                <li>
+                  <b>February, 2023</b>: Volunteered at
+                  <a href="https://2023.agileindia.org/" target="_blank"
+                    >Agile India 2023</a
+                  >, Bangalore
+                  <!-- - Asia's Premier & Leading Product Engineering
                 Practices Conference -->
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <heading>Publications</heading>
+        </div>
+        <div id="blogsSection" class="content-section">
+          <div class="container">
+            <heading>Blogs</heading>
+            <div class="blogs-section">
+              <ul>
+                <li>
+                  <a href="https://myblog.com/post1" target="_blank"
+                    >RealNVP: Understanding Flow-based Generative Models</a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-      <div class="container">
-        <heading>Works</heading>
-        <p></p>
-        <div class="tab-list">
-          <span class="tab-item" onclick="showSection('papers', this)"
-            >Papers</span
-          >
-          <span class="tab-item active" onclick="showSection('journals', this)"
-            >Journals</span
-          >
-          <span class="tab-item" onclick="showSection('projects', this)"
-            >Projects</span
-          >
-        </div>
-        <div id="papers" class="tab-content active">
-          <ul>
-            <li>Coming soon.</li>
-          </ul>
-        </div>
-
-        <div id="journals" class="tab-content">
-          <p>2024</p>
-          <ul>
-            <li>
-              "Towards Unsupervised Latent Representations for Cattle Image
-              Segmentation" - V. Elluru, A. Sallam, A. Alves, T. Bresolin.
-              <!-- <a
-              href="https://scholar.google.com/citations?hl=pt-BR&user=87_0v9kAAAAJ&view_op=list_works&sortby=pubdate"
-              target="_blank"
-              >Dr. Tiago Bresolin</a
-            > -->
-              <a href="error_not_found.html">paper</a> /
-              <a href="https://github.com/bresolinlab/LISA" target="_blank"
-                >code</a
-              >
-              /
+      <table
+        style="
+          width: 60%;
+          border: 0px;
+          border-spacing: 0px;
+          border-collapse: separate;
+          margin-right: auto;
+          margin-left: auto;
+        "
+      >
+        <tbody>
+          <tr style="height: 10px">
+            <td colspan="2"></td>
+          </tr>
+          <tr>
+            <td style="padding: 20px; width: 1%; vertical-align: middle">
+              <!-- <div class="one">
+              <img src="assets/images/unlase.png" width="350" , height="300" />
+            </div> -->
+            </td>
+            <td style="padding: 20px; width: 100%; vertical-align: middle">
+              <a href="">
+                <papertitle
+                  >UnLaSE: Towards Unsupervisd Latent Representations for
+                  Livestock Image Segmentation
+                </papertitle>
+              </a>
+              <br />
+              <strong>Veeraraju Elluru</strong>, Ahmed Sallam, Anderson Alves,
+              Tiago Bresolin
+              <br />
+              <br />
+              <em><span style="color: brown">USPLF 2025</span></em>
+              <br />
+              <a href="index.html">paper</a> /
+              <a href="https://github.com/bresolinlab/LISA">code</a> /
               <a
                 href="https://digitalag.illinois.edu/education/reu-program/students-and-alumni/"
                 target="_blank"
                 >program page</a
               >
-            </li>
-          </ul>
-        </div>
-
-        <div id="projects" class="tab-content">
-          <h3>ML-Track</h3>
-          <ul>
-            <li>
-              "Ongoing Research Project in collaboration with CERN" - Developing
-              flow-based generative models for "Fast Shower Simulation
-              (FastSim)" in High Energy Physics
-            </li>
-            <!-- <li>
-            "Project Focal" - Focused on building an algorithm to tag millions
-            of proprietary images for
-            <a href="https://www.atree.org/" target="_blank">ATREE</a>. The
-            feature developed was integrated into the Plants of India
-            <a href="https://poi2.intellispiders.com/" target="_blank"
-              >website</a
-            >. It was the key step towards <b>Image Retrieval via Search</b>.
-            [<a href="https://github.com/Veeraraju-E/Focal" target="_blank"
-              >GitHub</a
-            >]
-          </li> -->
-            <li>
-              "LLMs get RAGged - A simple web-augmented RAG application to
-              demonstrate the effectiveness of context-enhanced LLMs". Course
-              project for CSL 3050 - Database Systems. <br />
-              [<a
-                href="https://github.com/Veeraraju-E/DBMS_Proj"
-                target="_blank"
-                >GitHub</a
-              >] [<a
-                href="https://huggingface.co/spaces/Veeraraju/demo"
-                target="_blank"
-                >Hugging Face</a
-              >]
-            </li>
-            <li>
-              "Face Recognition on
-              <a href="https://vis-www.cs.umass.edu/lfw/" target="_blank"
-                >LFW dataset</a
-              >, using traditional machine learning classifier systems - A
-              Comprehensive Analysis". Course project for CSL 2050 - Pattern
-              Recognition and Machine Learning.<br />[<a
-                href="https://github.com/majisouvik26/Face_Recognition-PRML_Course_Project"
-                target="_blank"
-                >GitHub</a
-              >] [<a
-                href="https://github.com/majisouvik26/Face_Recognition-PRML_Course_Project/blob/main/PRML_Project_Report.pdf"
-                target="_blank"
-                >Report</a
-              >]
-            </li>
-            <li>
+              <p></p>
+              <p>
+                We propose the implementation of a novel self-supervised
+                algorithm for generating precise cattle masks, at scale.
+                Existing works that use SSL were primarily based on contrastive
+                learning which necessitates positive and negative samples. Our
+                work reduces this need drastically and can generate highly
+                accurate masks across cattle breeds and environmental
+                conditions.
+              </p>
+            </td>
+          </tr>
+          <tr style="height: 10px">
+            <td colspan="2"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="projectsSection" class="content-section">
+      <div class="canvas">
+        <div class="container">
+          <heading>Projects</heading>
+          <div class="project-section">
+            <h3>ML-Track</h3>
+            <ul>
+              <li>
+                Building a "Multimodal Stress Counselor". <br />
+                [<a
+                  href="https://github.com/AISocietyIITJ/WARP-StressCounseling"
+                  target="_blank"
+                  >GitHub</a
+                >]
+              </li>
+              <li>
+                "Ongoing Research Project in collaboration with CERN" -
+                Developing flow-based generative models for "Fast Shower
+                Simulation (FastSim)" in High Energy Physics. <br />
+                [<a href="https://github.com/Veeraraju-E/CERN" target="_blank"
+                  >GitHub</a
+                >]
+              </li>
+              <li>
+                "LLMs get RAGged - A simple web-augmented RAG application to
+                demonstrate the effectiveness of context-enhanced LLMs". Course
+                project for CSL 3050 - Database Systems. <br />
+                [<a
+                  href="https://github.com/Veeraraju-E/DBMS_Proj"
+                  target="_blank"
+                  >GitHub</a
+                >] [<a
+                  href="https://huggingface.co/spaces/Veeraraju/demo"
+                  target="_blank"
+                  >Hugging Face</a
+                >]
+              </li>
+              <li>
+                "Face Recognition on
+                <a href="https://vis-www.cs.umass.edu/lfw/" target="_blank"
+                  >LFW dataset</a
+                >, using traditional machine learning classifier systems - A
+                Comprehensive Analysis". Course project for CSL 2050 - Pattern
+                Recognition and Machine Learning.<br />
+                [<a
+                  href="https://github.com/majisouvik26/Face_Recognition-PRML_Course_Project"
+                  target="_blank"
+                  >GitHub</a
+                >] [<a
+                  href="https://github.com/majisouvik26/Face_Recognition-PRML_Course_Project/blob/main/PRML_Project_Report.pdf"
+                  target="_blank"
+                  >Report</a
+                >]
+              </li>
+              <!-- <li>
               "Real-time Camera-based Attendance Management System". Course
               project for CSL 2060 - Software Engineering. [<a
                 href="https://github.com/Veeraraju-E/RTCams_"
                 target="_blank"
                 >GitHub</a
               >]
-            </li>
-          </ul>
-          <h3>Core CS-Track</h3>
-          <ul>
-            <li>
-              "Secure Audit Logger - A comprehensive
-              <b>security auditing tool</b> designed to assess, monitor, and
-              enforce system security policies across a trifecta of operating
-              systems (macOS, Windows, and Ubuntu)". Course project for CSL 3030
-              - Operating Systems. <br />[<a
-                href="https://github.com/Veeraraju-E/Secure_Audit_Logger"
-                target="_blank"
-                >GitHub</a
-              >]
-            </li>
-            <li>
+            </li> -->
+            </ul>
+
+            <h3>Core CS-Track</h3>
+            <ul>
+              <li>
+                "P2P Gossip Network - A ". Course Project for CSL 3080 -
+                Computer Networks. <br />
+                [<a
+                  href="https://github.com/Veeraraju-E/p2p-python"
+                  target="_blank"
+                  >GitHub</a
+                >]
+              </li>
+              <li>
+                "Secure Audit Logger - A comprehensive
+                <b>security auditing tool</b> designed to assess, monitor, and
+                enforce system security policies across a trifecta of operating
+                systems (macOS, Windows, and Ubuntu)". Course project for CSL
+                3030 - Operating Systems. <br />
+                [<a
+                  href="https://github.com/Veeraraju-E/Secure_Audit_Logger"
+                  target="_blank"
+                  >GitHub</a
+                >]
+              </li>
+              <!-- <li>
               "Huffman Encoder for compressing files". Course project for CSL
               1020 - Introduction to Computer Science. [<a
                 href="https://github.com/VeerarajuElluru/Huffman-Coding"
                 target="_blank"
                 >GitHub</a
               >]
-            </li>
-          </ul>
-        </div>
-      </div>
-      <!-- <div class="container">
-        <heading>Fun</heading>
-        <div class="fun-section">
-          <div class="container">
-            <h3>Self-Trivia</h3>
-            <ul>
-              <li>I like Chess. <a href="" target="">Challenge me!</a></li>
-              <li>My MBTI Type: ISTJ</li>
-            </ul>
-
-            <h3>Blogs</h3>
-            <ul>
-              <li>
-                <a href="https://myblog.com/post1" target="_blank">RealNVP</a>
-              </li>
+            </li> -->
             </ul>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
-    <table
-      style="
-        width: 60%;
-        border: 0px;
-        border-spacing: 0px;
-        border-collapse: separate;
-        margin-right: auto;
-        margin-left: auto;
-      "
-    >
-      <!-- <tbody>
-        <tr style="height: 10px">
-          <td colspan="2"></td>
-        </tr>
-        <tr>
-          <td style="padding: 20px; width: 1%; vertical-align: middle">
-            <div class="one">
-              <img src="assets/images/unlase.png" width="350" , height="300" />
-            </div>
-          </td>
-          <td style="padding: 20px; width: 100%; vertical-align: middle">
-            <a href="">
-              <papertitle
-                >UnLaSE: Towards Unsupervisd Latent Representations for
-                Livestock Image Segmentation
-              </papertitle>
-            </a>
-            <br />
-            <strong>Veeraraju Elluru</strong>, Ahmed Sallam, Anderson Alves,
-            Tiago Bresolin
-            <br />
-            <br />
-            <em><span style="color: brown">USPLF 2025</span></em>
-            <br />
-            <a href="index.html">paper</a> /
-            <a href="https://github.com/bresolinlab/LISA">code</a> /
-            <a
-              href="https://digitalag.illinois.edu/education/reu-program/students-and-alumni/"
-              target="_blank"
-              >program page</a
-            >
-            <p></p>
-            <p>
-              We propose the implementation of a novel self-supervised algorithm
-              for generating precise cattle masks, at scale. Existing works that
-              use SSL were primarily based on contrastive learning which
-              necessitates positive and negative samples. Our work reduces this
-              need drastically and can generate highly accurate masks across
-              cattle breeds and environmental conditions.
-            </p>
-          </td>
-        </tr>
-        <tr style="height: 10px">
-          <td colspan="2"></td>
-        </tr>
-      </tbody> -->
-    </table>
-
+    <div id="blogsSection" class="content-section">
+      <div class="container">
+        <heading>Blogs</heading>
+        <div class="blogs-section">
+          <ul>
+            <li>
+              <a href="https://myblog.com/post1" target="_blank"
+                >RealNVP: Understanding Flow-based Generative Models</a
+              >
+            </li>
+            <!-- Add more blog entries -->
+          </ul>
+        </div>
+      </div>
+    </div>
     <table
       width="80%"
       align="center"
@@ -374,13 +377,48 @@
             <br />
             <p style="text-align: right; font-size: small">
               <a href="https://jonbarron.info/">This guy is so cool</a>.
-              <br />Updated January 2024.
+              <br />Updated February 2025.
             </p>
           </td>
         </tr>
       </tbody>
     </table>
+    <script>
+      function toggleMenu() {
+        const panel = document.getElementById("sidePanel");
+        panel.classList.toggle("active");
+      }
 
+      function showContent(section) {
+        // Hide all sections
+        document.querySelectorAll(".content-section").forEach((el) => {
+          el.classList.remove("active");
+        });
+
+        // Show selected section
+        const selectedSection = document.getElementById(section + "Section");
+        if (selectedSection) {
+          selectedSection.classList.add("active");
+        }
+
+        // Close menu
+        toggleMenu();
+      }
+
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const panel = document.getElementById("sidePanel");
+        const menuButton = document.querySelector(".menu-button");
+
+        if (
+          !panel.contains(event.target) &&
+          !menuButton.contains(event.target) &&
+          panel.classList.contains("active")
+        ) {
+          toggleMenu();
+        }
+      });
+    </script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script>
       var isScrambled = true;
