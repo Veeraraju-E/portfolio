@@ -1,0 +1,136 @@
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.track-section {
+  margin-bottom: 40px;
+}
+
+.track-section h2 {
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.project-card {
+  background: #fafaf8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.project-card h3 {
+  color: #0055aa;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.project-card.completed h3 {
+  color: #00ab48;
+}
+
+.project-card p {
+  color: #666;
+  font-size: 0.9em;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.project-links {
+  display: flex;
+  gap: 15px;
+}
+
+.project-links a {
+  color: #0055aa;
+  text-decoration: none;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.project-links a:hover {
+  color: #003977;
+}
+
+.project-status {
+  position: absolute;
+  top: 12px;
+  right: -35px;
+  background: #fafaf8;
+  color: white;
+  padding: 5px 40px;
+  transform: rotate(45deg);
+  font-size: 0.8em;
+  font-family: "Source Code Pro", monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.project-card.completed {
+  border-color: #fafaf8;
+  background: linear-gradient(to bottom right, #fff, rgba(0, 200, 83, 0.05));
+}
+
+.project-card.completed::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #00c853, #64dd17);
+}
+
+.project-card.completed::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(
+    45deg,
+    transparent 48%,
+    rgba(0, 200, 83, 0.1) 49%,
+    rgba(0, 200, 83, 0.1) 51%,
+    transparent 52%
+  );
+  background-size: 10px 10px;
+  opacity: 0.5;
+}
+
+@media (max-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}

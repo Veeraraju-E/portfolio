@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Blogs - Veeraraju Elluru</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="author" content="Veeraraju Elluru" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="assets/css/font.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/projects.css" />
+  </head>
+  <body>
+    <div class="menu-button" onclick="toggleMenu()">
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+    </div>
+
+    <div class="side-panel" id="sidePanel">
+      <div class="close-button" onclick="toggleMenu()">×</div>
+      <div class="panel-content">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="blogs.html">Blogs</a>
+      </div>
+    </div>
+
+    <div class="blogs-container">
+      <h1>Blogs</h1>
+
+      <section class="blogs-section">
+        <div class="blog-grid">
+          <div class="project-card">
+            <h3>Coming Soon</h3>
+            <!-- <p>
+              Stay tuned for upcoming blog posts on machine learning, computer science, and technology.
+            </p> -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+      function toggleMenu() {
+        const panel = document.getElementById("sidePanel");
+        panel.classList.toggle("active");
+      }
+
+      function showContent(section) {
+        // Hide all sections
+        document.querySelectorAll(".content-section").forEach((el) => {
+          el.classList.remove("active");
+        });
+
+        // Show selected section
+        const selectedSection = document.getElementById(section + "Section");
+        if (selectedSection) {
+          selectedSection.classList.add("active");
+        }
+
+        // Close menu
+        toggleMenu();
+      }
+
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const panel = document.getElementById("sidePanel");
+        const menuButton = document.querySelector(".menu-button");
+
+        if (
+          !panel.contains(event.target) &&
+          !menuButton.contains(event.target) &&
+          panel.classList.contains("active")
+        ) {
+          toggleMenu();
+        }
+      });
+    </script>
+  </body>
+</html>
