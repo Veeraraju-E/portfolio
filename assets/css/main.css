@@ -84,6 +84,13 @@ h3 {
   font-size: 1.05em;
   color: #222;
 }
+.blog-date {
+  color: #b16226;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2px;
+  display: inline-block;
+}
 .blog-list {
   padding-left: 1.2em;
 }
@@ -117,6 +124,99 @@ h3 {
   text-decoration: underline;
   color: #f09228;
 }
+/* Blog content styles */
+.blog-container {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 2.5%;
+  line-height: 1.6;
+}
+
+.blog-container h1 {
+  font-size: 28px;
+  font-weight: normal;
+  text-align: left;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.blog-container h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 24px 0 12px 0;
+  color: #222;
+}
+
+.blog-container h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 20px 0 8px 0;
+  color: #222;
+}
+
+.blog-container h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 16px 0 6px 0;
+  color: #222;
+}
+
+.blog-container p {
+  margin: 12px 0;
+  text-align: justify;
+}
+
+.blog-container ul,
+.blog-container ol {
+  margin: 12px 0;
+  padding-left: 24px;
+}
+
+.blog-container li {
+  margin: 6px 0;
+}
+
+.blog-container blockquote {
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-left: 4px solid #1772d0;
+  background-color: #f8f9fa;
+  font-style: italic;
+}
+
+.blog-container code {
+  background-color: #f1f3f4;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+}
+
+.blog-container pre {
+  background-color: #f1f3f4;
+  padding: 12px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 16px 0;
+}
+
+.blog-container pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.blog-metadata {
+  color: #b16226;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-bottom: 24px;
+}
+
+/* MathJax styling */
+.MathJax {
+  font-size: 1.1em !important;
+}
+
 @media (max-width: 800px) {
   td[style*="width:60%"],
   td[style*="width:40%"] {
@@ -128,5 +228,14 @@ h3 {
     max-width: 180px !important;
     margin: 0 auto 16px auto;
     display: block;
+  }
+  .blog-container {
+    padding: 4%;
+  }
+  .blog-container h1 {
+    font-size: 24px;
+  }
+  .blog-container h2 {
+    font-size: 18px;
   }
 }

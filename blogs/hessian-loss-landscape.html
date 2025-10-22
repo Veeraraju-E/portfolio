@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Loss Landscapes and the Hessian Matrix - Veeraraju Elluru</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="author" content="Veeraraju Elluru" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
+
+    <style>
+        /* Citation hover tooltips */
+        .citation {
+            position: relative;
+            cursor: help;
+        }
+
+        .citation:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f5f5f5;
+            color: #333;
+            padding: 12px 16px;
+            border: 2px solid #333;
+            border-radius: 6px;
+            font-size: 0.9em;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            white-space: normal;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .citation:hover::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #333;
+            z-index: 1000;
+        }
+
+        /* Grey out references section */
+        .references-section {
+            color: #666;
+        }
+
+        .references-section a {
+            color: #888;
+        }
+
+        /* Automatic section numbering */
+        .blog-container {
+            counter-reset: section subsection;
+        }
+
+        .blog-container h2 {
+            counter-increment: section;
+            counter-reset: subsection;
+        }
+
+        .blog-container h3 {
+            counter-increment: subsection;
+        }
+
+        .section-number {
+            font-weight: bold;
+            margin-right: 0.5em;
+        }
+    </style>
+
+    <!-- MathJax Configuration -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        // Add section numbers after MathJax loads
+        window.addEventListener('load', function () {
+            // Wait for MathJax to be ready
+            if (window.MathJax) {
+                MathJax.startup.promise.then(function () {
+                    addSectionNumbers();
+                });
+            } else {
+                // Fallback if MathJax isn't available
+                setTimeout(addSectionNumbers, 1000);
+            }
+        });
+
+        function addSectionNumbers() {
+            const container = document.querySelector('.blog-container');
+            if (!container) return;
+
+            let sectionCount = 0;
+            let subsectionCount = 0;
+
+            // Process h2 elements (main sections)
+            const h2Elements = container.querySelectorAll('h2');
+            h2Elements.forEach(function (h2) {
+                // Skip References section
+                if (h2.textContent.trim().toLowerCase().includes('references')) {
+                    return;
+                }
+
+                sectionCount++;
+                subsectionCount = 0; // Reset subsection counter
+
+                // Create a wrapper to preserve the original heading structure
+                const wrapper = document.createElement('span');
+                wrapper.className = 'section-number';
+                wrapper.innerHTML = `$\\S${sectionCount}$ `;
+
+                // Insert the section number at the beginning
+                h2.insertBefore(wrapper, h2.firstChild);
+            });
+
+            // Process h3 elements (subsections)
+            const h3Elements = container.querySelectorAll('h3');
+            h3Elements.forEach(function (h3) {
+                // Skip References section
+                if (h3.textContent.trim().toLowerCase().includes('references')) {
+                    return;
+                }
+
+                // Find the parent section number by looking backwards
+                let currentSection = 0;
+                let prevElement = h3.previousElementSibling;
+                while (prevElement) {
+                    if (prevElement.tagName === 'H2') {
+                        // Count how many h2 elements come before this h2
+                        const allH2Elements = container.querySelectorAll('h2');
+                        for (let i = 0; i < allH2Elements.length; i++) {
+                            if (allH2Elements[i] === prevElement) {
+                                currentSection = i + 1;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    prevElement = prevElement.previousElementSibling;
+                }
+
+                // Count subsections within this section
+                let subsectionCount = 0;
+                let checkElement = h3.previousElementSibling;
+                while (checkElement) {
+                    if (checkElement.tagName === 'H3') {
+                        subsectionCount++;
+                    } else if (checkElement.tagName === 'H2') {
+                        break;
+                    }
+                    checkElement = checkElement.previousElementSibling;
+                }
+                subsectionCount++; // Include current subsection
+
+                // Create a wrapper to preserve the original heading structure
+                const wrapper = document.createElement('span');
+                wrapper.className = 'section-number';
+                wrapper.innerHTML = `$\\S${currentSection}.${subsectionCount}$ `;
+
+                // Insert the section number at the beginning
+                h3.insertBefore(wrapper, h3.firstChild);
+            });
+
+            // Re-render MathJax if available
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                MathJax.typesetPromise();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="nav">
+        <a href="../index.html">Home</a> |
+        <a href="../projects.html">Projects</a> |
+        <a href="../blogs.html">Blogs</a>
+    </div>
+
+    <article class="blog-container">
+        <h1>Loss Landscapes and the Hessian Matrix</h1>
+        <p class="blog-metadata">February 2025</p>
+
+        <p>Much can be said about the optimizability of any loss function based on its associated Hessian matrix. The
+            convexity of an objective function $\mathbf{L}$ is handy for evaluating (or estimating) gradients. We can
+            exactly compute them for nice convex functions (by "nice", I mean smooth, continuous, differentiable), but
+            not so much for non-convex ones. In either setup, finding the right weight updates using gradients or their
+            Jacobians (the Hessian matrix) becomes pivotal. Understanding the Hessian's structure helps understand the
+            loss function's complexity and how manipulating data categories can optimize training. Simply put, the
+            Hessian matrix is the Jacobian of the gradient for a multivariable vector function spitting out some scalars
+            which is up for grabs for us to analyze...</p>
+
+        <h2 id="deep-learning-loss-landscapes">Deep Learning Loss Landscapes</h2>
+
+        <p>A loss landscape is simply the surface you get when plotting the loss function $L(\theta)$ over all possible
+            parameter configurations $\theta \in \mathbb{R}^D$ of your model. In classical convex optimization, this
+            surface is "nice". The Hessian matrix of all second derivatives, $\nabla^2 L(\theta)$, is positive
+            semidefinite everywhere, guaranteeing a unique global minimum. We done? Nope.</p>
+
+        <p>Alas, deep neural networks absolutely shatter this simplicity. With millions of parameters interacting
+            through
+            nonlinear activations, the loss landscape becomes a complex, highly nonconvex terrain filled with a large
+            number of critical points. This is the Hessian can tell a thing or two.</p>
+
+        <p>Formally, it's the $D \times D$ matrix:</p>
+
+        <p>$$H(\theta)_{ij} = \frac{\partial^2 L(\theta)}{\partial \theta_i \partial \theta_j}$$</p>
+
+        <p>which stems from the second-order Taylor expansion:</p>
+
+        <p>$$L(\theta + \delta) \approx L(\theta) + \nabla L(\theta)^T \delta + \frac{1}{2} \delta^T H(\theta) \delta
+            \quad \text{(ignore higher order terms)}$$
+        </p>
+
+        <p>The Hessian tells us exactly how the loss changes as we move in any direction $\delta$. Directions with large
+            positive e-values are steep valleys and negative e-values signal saddle points with downhill escapes.
+            The e-values encode the landscape's shape around any point of interest!
+        </p>
+
+        <h2 id="a-universal-pattern">A Universal Pattern</h2>
+
+        <p>Computing the full Hessian for deep networks is usually infeasible as it requires $O(D^2)$ memory, which
+            explodes for modern architectures. But researchers have developed clever approximations by examining the
+            Hessian through spectral thoery. Upon EVD of the Hessian of <b>trained</b> deep networks, we consistently
+            observe a universal pattern. A "bulk" of the e-values clustered near zero, and just a handful of "outliers"
+            have much larger magnitudes<sup><a href="#fn1" id="ref1" class="citation"
+                    data-tooltip="Sagun, L., Evci, U., Guney, V. U., Dauphin, Y., & Bottou, L. (2017). Empirical Analysis of the Hessian of Over-Parametrized Neural Networks. arXiv:1706.04454.">1</a></sup>.
+            This in fact is a direct result of rank deficiency/singularity viz a strong signature of
+            overparameterization and <em>superposition</em>. This is substantiated by Sagun et al.<sup><a href="#fn2"
+                    id="ref2" class="citation"
+                    data-tooltip="Sagun, L., Bottou, L., & LeCun, Y. (2016). e-values of the Hessian in Deep Learning: Singularity and Beyond. arXiv:1611.01838 / NIPS 2016 Workshop.">2</a></sup>
+            by showing that increasing network width adds zero e-values without creating new large ones.
+        </p>
+
+        <p>So, in practice, only a few directions (corresponding to the larger e-values) exhibit significant curvature.
+            The vast majority of directions are nearly <em>flat</em>. Even more intriguingly, the number of large
+            e-values often equals the number of
+            output classes, indicating these directions capture the curvature needed to distinguish between classes.
+            Even if we change the architecture, the task, the model, or the modality, the "bulk" stays roughly the same
+            as
+            long as we use SGD for optimization. Only the "outliers" shift in scale and size.</p>
+
+        <h3 id="but-what-does-singularity-really-mean">But what does singularity <em>really</em> mean?</h3>
+
+        <p>This extreme singularity has profound implications that kinda changed how I look at training the NNs. Since
+            most Hessian e-values are nearly zero, the loss landscape has many flat directions at minima with wide
+            valleys rather than narrow pits.</p>
+
+        <p>In such flat, overparameterized regimes, the classical notion of isolated basins of attraction are a bit
+            misleading. Different minima found by different training runs or batch sizes can be connected through these
+            flat dimensions, effectively lying in the same broad basin. The landscape isn't a collection of isolated
+            wells; it's more like a vast plateau with gentle undulations.</p>
+
+        <p>Over the course of training, the Hessian typically flattens further. Empirical results consistently show that
+            both the largest e-value and the trace (sum of all e-values) <em>decrease</em> as gradient descent
+            converges. In other words, SGD actively steers models into flatter regions of the
+            loss surface, and this tendency toward flatness is the mathematical reasoning behind generalization.
+        </p>
+
+        <h3 id="the-geometry-of-saddles-and-flatness">The Geometry of Saddles and Flatness</h3>
+
+        <p>We can borrow some neat stuff from the Random Matrix Theory. It particularly suggests that saddle
+            points (critical points with negative e-values) vastly outnumber
+            true local extrema<sup><a href="#fn3" id="ref3" class="citation"
+                    data-tooltip="Baskerville, N. P., Keating, J. P., Mezzadri, F., Najnudel, J., & Poplavska, V. (2021). Appearance of Random Matrix Theory in deep learning. Physica A, arXiv:2107.11003.">3</a></sup>.
+            As loss increases, a random Hessian's spectrum
+            (following Wigner's semicircle law<sup><a href="#fn4" id="ref4" class="citation"
+                    data-tooltip="Wigner, E. P. (1955). Characteristic vectors of bordered matrices with infinite dimensions. Annals of Mathematics, 62(3), 548-564.">4</a></sup>)
+            shifts leftward: many e-values become negative, with large density accumulating near zero. This explains
+            why high-dimensional loss surfaces are studded with saddle plateaus that can slow training. Dauphin et al.
+            made an even stronger argument: in very high dimensions, <em>almost all</em>
+            non-global critical points are saddles<sup><a href="#fn5" id="ref5" class="citation"
+                    data-tooltip="Dauphin, Y. N., Pascanu, R., Gulcehre, C., Cho, K., Ganguli, S., & Bengio, Y. (2014). Identifying and attacking the saddle point problem in high-dimensional non-convex optimization. NIPS 2014, arXiv:1406.2572.">5</a></sup>.
+            Why? Because it's exponentially unlikely for all curvature directions to be strictly positive
+            simultaneously.</p>
+
+        <p>One of the most debated connections in deep learning is between the "flatness" of minima and generalization
+            performance. A flat minimum has many small Hessian e-values (a broad valley), while a sharp minimum has
+            at least one large e-value (a narrow valley). We are taught, based on many empirical validations, that
+            small-batch SGD tends to find flat minima with
+            better test accuracy, while larger batches can converge to sharper minima with poorer generalization<sup><a
+                    href="#fn6" id="ref6" class="citation"
+                    data-tooltip="Keskar, N. S., Mudigere, D., Nocedal, J., Smelyanskiy, M., & Tang, P. T. P. (2017). On Large-Batch Training for Deep Learning: Generalization Gap and Sharp Minima. ICLR 2017, arXiv:1609.04836.">6</a></sup>.
+            This observation sparked methods like Entropy-SGD<sup><a href="#fn7" id="ref7" class="citation"
+                    data-tooltip="Chaudhari, P., Choromanska, A., Soatto, S., LeCun, Y., Baldassi, C., Borgs, C., Chayes, J., Sagun, L., & Zecchina, R. (2017). Entropy-SGD: Biasing Gradient Descent Into Wide Valleys. ICLR 2017, arXiv:1611.01838.">7</a></sup>
+            and Sharpness-Aware
+            Minimization (SAM)<sup><a href="#fn8" id="ref8" class="citation"
+                    data-tooltip="Foret, P., Kleiner, A., Mobahi, H., & Neyshabur, B. (2021). Sharpness-Aware Minimization for Efficiently Improving Generalization. ICLR 2021, arXiv:2010.01412.">8</a></sup>,
+            which explicitly bias
+            training toward minimizing Hessian spectral norms. However, while these techniques do reduce the maximum
+            e-value $\lambda_{\max}$, the generalization benefit can sometimes vanish
+            under certain conditions. The relationship between Hessian-based flatness and generalization is more subtle
+            than a simple "flatter is always better" story.</p>
+
+        <h2 id="equivalent-formulations"> Equivalent Formulations </h2> <br>
+        <p>For a neural network, the Hessian can be written as:</p>
+
+        <p>$$H(\theta) = \frac{1}{N} \sum_{i=1}^N \nabla^2_\theta \ell(f(x_i;\theta), y_i) \quad \text{where }
+            \ell(f(x_i;\theta), y_i) \text{ is the loss value for the $x_i$}$$ viz the average of per-example Hessians.
+            In supervised settings, $H(\theta)$ actually decomposes into a positive-semidefinite term closely related to
+            the empirical Fisher / Generalized Gauss-Newton (which captures gradient-covariance, $G$)
+            plus a residual ($H'$) that involves second derivatives of the model outputs. This
+            stems from the Gauss-Newton decomposition of $H$ where $G$ captures gradient covariance which tends
+            to dominate at minima<sup><a href="#fn9" id="ref9" class="citation"
+                    data-tooltip="Martens, J. (2020). New Insights and Perspectives on the Natural Gradient Method. Journal of Machine Learning Research, 21(146), 1-76.">9</a></sup>.
+        </p>
+        <!-- 
+        <p>The fact that e-values sum to the trace, $\mathrm{Tr}(H) = \sum_i \lambda_i$, motivates trace regularizers.
+            The condition number $\kappa = \lambda_{\max}/\lambda_{\min}$ gauges the anisotropy of the
+            valley.</p> -->
+        <p>More specifically for wide neural networks, Jacot et al. show that the Hessian converges to the covariance of
+            the neural tangent
+            kernel (NTK)<sup><a href="#fn10" id="ref10" class="citation"
+                    data-tooltip="Jacot, A., Gabriel, F., & Hongler, C. (2018). Neural Tangent Kernel: Convergence and Generalization in Neural Networks. NeurIPS 2018, arXiv:1806.07572.">10</a></sup>.
+            Under this regime, the Hessian has many zero e-values due to symmetries and the large
+            parameter-to-data ratio, i.e., rank deficiency. This connects to
+            classical
+            results from Kawaguchi et al. showing that, for certain architectures, every local minimum can be
+            global<sup><a href="#fn11" id="ref11" class="citation"
+                    data-tooltip="Kawaguchi, K. (2016). Deep Learning without Poor Local Minima. NeurIPS 2016.">11</a></sup>
+            because ~all negative curvature directions lead to a global valley owing to overparameterization.</p>
+
+        <h2 id="practical-implications">Practical Implications</h2>
+
+        <p>Understanding the Hessian's structure has real consequences for how we train and design neural networks.</p>
+
+        <p><strong>Second-Order Optimization:</strong> In principle, we could actually use the Hessian information to
+            accelerate
+            training through Newton's method<sup><a href="#fn12" id="ref12" class="citation"
+                    data-tooltip="Pearlmutter, B. A. (1994). Fast exact multiplication by the Hessian. Neural Computation, 6(1), 147-160.">12</a></sup>.
+            In practice, the exact Newton is prohibitively expensive for large networks. So, Hessian-free
+            and quasi-Newton (pushed towards saddle points) methods approximate curvature implicitly<sup><a href="#fn13"
+                    id="ref13" class="citation"
+                    data-tooltip="Martens, J. (2010). Deep learning via Hessian-free optimization. ICML 2010.">13</a></sup>.
+            One could also use a saddle-free Newton by just flipping the sign of
+            negative e-values, effectively using $|H|^{-1}\nabla L$ to escape saddles quickly.
+        </p>
+
+        <p><strong>Regularization:</strong> We can explicitly penalize Hessian norms to encourage flatness. Adding a
+            Hessian trace regularizer $\gamma$ to the loss pushes SGD into flatter minima and has improved
+            generalization in experiments. During training too, we could monitor the Hessian-based metrics include
+            $\lambda_{max}$, the condition number ($\kappa = \lambda_{\max}/\lambda_{\min}$), and the trace
+            ($\mathrm{Tr}(H) = \sum_i \lambda_i$) to provide valuable diagnostics for optimization health. The
+            Generalized Gauss-Newton formulation also allows for clever approximations and targeted
+            regularization strategies<sup><a href="#fn14" id="ref14" class="citation"
+                    data-tooltip="Schraudolph, N. N. (2002). Fast curvature matrix-vector products for second-order gradient descent. Neural Computation, 14(7), 1723-1738.">14</a></sup>.
+        </p>
+
+        <p><strong>Layer Structure:</strong> Sankar et al. show that each layer's
+            Hessian has a similar eigenspectrum to the full network, with middle layers often dominating
+            curvature<sup><a href="#fn15" id="ref15" class="citation"
+                    data-tooltip="Sankar, A. R., Khasbage, Y., Vigneswaran, R., & Balasubramanian, V. N. (2021). A Deeper Look at the Hessian Eigenspectrum of Deep Neural Networks and its Applications to Regularization. AAAI 2021.">15</a></sup>.
+        </p>
+
+
+        <h2 id="looking-forward">Looking Forward</h2>
+
+        <p>The spectral analysis of the Hessian matrix has mostly become a tool for debugging, not something I do
+            always, but something I definitely check when the code seems correct. The eigenspectrum is directly
+            interpretable and provides some nice theoretical explanations to why simple first-order
+            methods work surprisingly well despite the nonconvexity, and why optimization can stall near saddles.
+        </p>
+
+        <p>Understanding Hessian geometry has already inspired new algorithms and sharpened our intuition about OOD
+            generalization. Researchers continue to develop more scalable Hessian estimators and forge sharper
+            theoretical links between curvature and generalization.</p>
+
+        <p>Ultimately, the Hessian's role in deep learning is to <em>quantify the shape of loss basins</em>. As we
+            continue to scale neural networks to ever-larger sizes, understanding this geometry is practically
+            essential. So, do try and look at the Hessian when you train a model!</p>
+
+        <hr style="margin: 40px 0 20px 0; border: none; border-top: 1px solid #ddd;">
+
+        <h3>References</h3>
+        <div class="references-section">
+            <ol style="font-size: 0.9em; line-height: 1.4;">
+                <li id="fn1">
+                    Sagun, L., Evci, U., Guney, V. U., Dauphin, Y., & Bottou, L. (2017). Empirical Analysis of the
+                    Hessian
+                    of Over-Parametrized Neural Networks. arXiv:1706.04454.
+                    <a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a>
+                </li>
+                <li id="fn2">
+                    Sagun, L., Bottou, L., & LeCun, Y. (2016). e-values of the Hessian in Deep Learning: Singularity
+                    and
+                    Beyond. arXiv:1611.01838 / NIPS 2016 Workshop.
+                    <a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a>
+                </li>
+                <li id="fn3">
+                    Baskerville, N. P., Keating, J. P., Mezzadri, F., Najnudel, J., & Poplavska, V. (2021). Appearance
+                    of
+                    Random Matrix Theory in deep learning. Physica A, arXiv:2107.11003.
+                    <a href="#ref3" title="Jump back to footnote 3 in the text.">↩</a>
+                </li>
+                <li id="fn4">
+                    Wigner, E. P. (1955). Characteristic vectors of bordered matrices with infinite dimensions. Annals
+                    of
+                    Mathematics, 62(3), 548-564.
+                    <a href="#ref4" title="Jump back to footnote 4 in the text.">↩</a>
+                </li>
+                <li id="fn5">
+                    Dauphin, Y. N., Pascanu, R., Gulcehre, C., Cho, K., Ganguli, S., & Bengio, Y. (2014). Identifying
+                    and
+                    attacking the saddle point problem in high-dimensional non-convex optimization. NIPS 2014,
+                    arXiv:1406.2572.
+                    <a href="#ref5" title="Jump back to footnote 5 in the text.">↩</a>
+                </li>
+                <li id="fn6">
+                    Keskar, N. S., Mudigere, D., Nocedal, J., Smelyanskiy, M., & Tang, P. T. P. (2017). On Large-Batch
+                    Training for Deep Learning: Generalization Gap and Sharp Minima. ICLR 2017, arXiv:1609.04836.
+                    <a href="#ref6" title="Jump back to footnote 6 in the text.">↩</a>
+                </li>
+                <li id="fn7">
+                    Chaudhari, P., Choromanska, A., Soatto, S., LeCun, Y., Baldassi, C., Borgs, C., Chayes, J., Sagun,
+                    L., &
+                    Zecchina, R. (2017). Entropy-SGD: Biasing Gradient Descent Into Wide Valleys. ICLR 2017,
+                    arXiv:1611.01838.
+                    <a href="#ref7" title="Jump back to footnote 7 in the text.">↩</a>
+                </li>
+                <li id="fn8">
+                    Foret, P., Kleiner, A., Mobahi, H., & Neyshabur, B. (2021). Sharpness-Aware Minimization for
+                    Efficiently
+                    Improving Generalization. ICLR 2021, arXiv:2010.01412.
+                    <a href="#ref8" title="Jump back to footnote 8 in the text.">↩</a>
+                </li>
+                <li id="fn9">
+                    Martens, J. (2020). New Insights and Perspectives on the Natural Gradient Method. Journal of Machine
+                    Learning Research, 21(146), 1-76.
+                    <a href="#ref9" title="Jump back to footnote 9 in the text.">↩</a>
+                </li>
+                <li id="fn10">
+                    Jacot, A., Gabriel, F., & Hongler, C. (2018). Neural Tangent Kernel: Convergence and Generalization
+                    in
+                    Neural Networks. NeurIPS 2018, arXiv:1806.07572.
+                    <a href="#ref10" title="Jump back to footnote 10 in the text.">↩</a>
+                </li>
+                <li id="fn11">
+                    Kawaguchi, K. (2016). Deep Learning without Poor Local Minima. NeurIPS 2016.
+                    <a href="#ref11" title="Jump back to footnote 11 in the text.">↩</a>
+                </li>
+                <li id="fn12">
+                    Pearlmutter, B. A. (1994). Fast exact multiplication by the Hessian. Neural Computation, 6(1),
+                    147-160.
+                    <a href="#ref12" title="Jump back to footnote 12 in the text.">↩</a>
+                </li>
+                <li id="fn13">
+                    Martens, J. (2010). Deep learning via Hessian-free optimization. ICML 2010.
+                    <a href="#ref13" title="Jump back to footnote 13 in the text.">↩</a>
+                </li>
+                <li id="fn14">
+                    Schraudolph, N. N. (2002). Fast curvature matrix-vector products for second-order gradient descent.
+                    Neural Computation, 14(7), 1723-1738.
+                    <a href="#ref14" title="Jump back to footnote 14 in the text.">↩</a>
+                </li>
+                <li id="fn15">
+                    Sankar, A. R., Khasbage, Y., Vigneswaran, R., & Balasubramanian, V. N. (2021). A Deeper Look at the
+                    Hessian Eigenspectrum of Deep Neural Networks and its Applications to Regularization. AAAI 2021.
+                    <a href="#ref15" title="Jump back to footnote 15 in the text.">↩</a>
+                </li>
+            </ol>
+        </div>
+    </article>
+
+    <p class="footer">
+        <a href="../blogs.html">Back to Blogs</a>
+    </p>
+</body>
+
+</html>
