@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Internals of LLMs - A short peek - Veeraraju Elluru</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="author" content="Veeraraju Elluru" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/main.css" />
+
+    <!-- MathJax Configuration -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="nav">
+        <a href="../index.html">Home</a> |
+        <a href="../projects.html">Projects</a> |
+        <a href="../blogs.html">Blogs</a>
+    </div>
+
+    <article class="blog-container">
+        <h1>Internals of LLMs - A short peek</h1>
+        <p class="blog-metadata">February 2025</p>
+
+        <p>Disclaimer: This blog by no means a comprehensive review of this field; we are not even close to
+            scratching the surface since this field has evolved a lot in the past couple years or so. It
+            is merely a collection of my thoughts and reflections on the field for a specific usecase of the
+            intersection of interpretability and privacy, specifically via Machine Unlearning (MU).</p>
+        <h2>Mechanistic Interpretability.</h2>
+        <p>
+            Mechanistic interpretability (MI) has emerged as a really cool field that uncorks the black box nature of
+            modern transformer based models. The stream of MI that I'm largely discussing here is those that deal with
+            internal activations. <em>Sparse Autoencoders</em> (SAEs), or more recently, <em>Transcoders</em> and
+            <em>Crosscoders</em>, are being utilized to monitor and analyze layer-wise activations and construct
+            interpretable feature spaces that reveal the internal workings of these complex systems. The other major
+            facet of MU is the representation phenomenology (Linear Representation Hypothesis, Minkowski Hypothesis,
+            etc), and Manifold Learning. The field overall has been pioneered by influential researchers like Chris
+            Olah, Neel Nanda, and companies like Anthropic, Goodfire. Despite its importance, MI remains a very niche
+            and cutting-edge research area that presents significant opportunities for meaningful contributions. The
+            complexity of modern transformer architectures makes this field both challenging and intellectually
+            rewarding for researchers seeking to understand how these models process and represent
+            information.
+        </p>
+
+        <p>
+            An undoubtedly excellent starting point Anthropic's recent blogs on causal circuit tracing and attribution
+            graphs<sup><a href="#fn1" id="ref1">1</a></sup>.
+        </p>
+
+        <h3>How to do Interpretability?</h3>
+        <p>
+        <blockquote>"Superposition is a common phenomenon that leads to polysemantic neurons." - Chris Olah</blockquote>
+        This statement encapsulates one of the core difficulties in understanding how neural networks represent and
+        process information.
+        </p>
+
+        <p>
+            <strong>Superposition</strong> occurs when multiple (often unrelated) features are being superposed on a
+            single neuron because there are significantly more features and concepts than neurons available in the
+            network. This leads to <strong>polysemantic neurons</strong>, where many different semantic concepts from
+            the dataset are captured by a single neuron. This phenomenon makes model editing considerably more
+            challenging, as one feature can be represented across a large set of neurons due to superposition effects.
+        </p>
+
+        <p>
+            The critical question then becomes: How do we break up this superposition to edit targeted concepts and
+            features? A popular tool to exploit is the <strong>Sparse Autoencoders</strong>,
+            which provide a powerful framework for disentangling these complex representations.
+        </p>
+
+        <h4>The Role of Sparse Autoencoders</h4>
+        <p>
+            Sparse Autoencoders (SAEs) operate in parallel to an LLM (for simplicity), which we'll denote as
+            $\mathit{M}$, to help convert complex, entangled connections into more understandable and interpretable
+            terms. After SAE training, when an input is passed through the original model, all the information present
+            within the SAE feature space is now contained in discrete, monosemantic neurons within the SAE feature
+            space.
+        </p>
+
+        <p>
+            This transformation is achievable because the SAE feature neurons exist in a higher-dimensional space, and
+            the encoding is learned in such a way that they produce discrete activations. However, this is only the
+            encoding step. To ensure that the interpretation is done accurately, SAEs must also translate and decode the
+            outputs from the feature neurons back to the outputs of the neurons in the original model $\mathit{M}$.
+        </p>
+
+        <p>
+            While conventional literature uses the term "Dictionary" only to refer to the final translation process,
+            intuitively, every hidden pair of interconnected layers in a multilayer SAE acts as a dictionary as well.
+            This process would have been relatively straightforward if <em>ReLU activations</em> and <em>positional
+                encodings</em> did not exist. Alas, that's not the case. These components add significant complexity to
+            the interpretation process. As part of the interpretability process, we need one SAE for every layer of the
+            original model $\mathit{M}$. Currently, most SAEs have just two layers: a Linear Encoder and a Linear
+            Decoder. These SAEs perform interpretation by mapping from the output activations of the
+            original model to output activations of the SAE representation $\mathit{S}$, followed by a translation back
+            from $\mathit{S}$ to a reconstructed model $\mathit{M'}$. The SAEs are trained to match the original model
+            $\mathit{M}$ and the reconstructed model $\mathit{M'}$.
+        </p>
+
+        <p>
+            While SAEs have spurred significant interest in sparse coding approaches, several key drawbacks have been
+            identified and addressed through improvised techniques that involve using crosscoders and transcoders. These
+            newer approaches aim to overcome some of the limitations (e.g., the lackluster ability to efficiently
+            explain <em>model diffing</em>) inherent in traditional sparse autoencoder architectures.
+        </p>
+
+        <h2>Manifold Learning.</h2>
+        <p>
+        <blockquote>Language Models don't predict the next token, they traverse through manifolds
+            predicting the probability distribution over the next token.</blockquote>
+        </p>
+        <p>
+            The fundamental intuition behind manifold learning is that high-dimensional representations coming in as
+            inputs typically reside on a characteristic <em>low-dimensional manifold</em>. This can be discovered using
+            techniques like diffusion kernels and other manifold learning algorithms. The low-dimensional features that
+            emerge from this process play crucial roles in <em>alignment</em> across modalities in the latent space,
+            which is essential for any model to achieve good utility and performance.
+        </p>
+
+        <p>
+            The exploitation of this manifold structure for various tasks represents a promising research area with
+            significant potential. If we <strong>couple</strong> this manifold learning concept with careful latent
+            space traversals, the outputs of any model can be made far more useful and <strong>well-aligned</strong>,
+            particularly when dealing with long-context inputs. Manifold estimation can learn a good characteristic
+            space that captures the intrinsic properties of the data, while latent space traversals can enhance the
+            overall output quality and coherence.
+        </p>
+
+        <h2>Convergence with Unlearning.</h2>
+        <p>
+            Machine unlearning represents an emerging challenge that I consider both highly impactful and essential for
+            the future of multimodal machine learning systems. This field addresses the critical need to selectively
+            remove or modify specific knowledge from trained models without compromising their overall performance and
+            utility.
+        </p>
+
+        <p>
+            In the unlearning paradigm, it has become an established fact that the removal of knowledge across
+            modalities without significant harm to utility is almost as challenging as performing open-heart surgery.
+            The complexity arises from the interconnected nature of learned representations and the difficulty of
+            isolating specific knowledge without affecting related concepts. I believe that the insights gained from
+            interpretability research, particularly those related to activations, manifolds, and representation
+            phenomenology can be leveraged to perform <strong>better knowledge removal</strong> while preserving model
+            quality and performance.
+        </p>
+
+        <p>
+            If we can truly and completely work within the manifold spaces of both the retain and forget data, then
+            unlearning might become significantly easier than the <strong>current, admittedly expensive fine-tuning
+                methodologies</strong>. Alternatively, we might be able to strike an optimal balance between both
+            approaches. Based on an initial review of recent literature, this thought experiment appears to be
+            implemented in this <strong>NeurIPS paper<sup><a href="#fn2" id="ref2">2</a></sup></strong>, which suggests
+            that the research community is already exploring these connections.
+        </p>
+
+        <p>
+            My current research work revolves essentially around sparse representations for model editing, model
+            steering, and model unlearning. For readers interested in exploring this field further, I highly recommend
+            reviewing this comprehensive survey paper<sup><a href="#fn3" id="ref3">3</a></sup> and
+            this exploration of open problems in mechanistic interpretability<sup><a href="#fn4" id="ref4">4</a></sup>.
+            These resources provide an excellent foundation for understanding the current
+            state of the field and identifying promising research directions.
+        </p>
+
+        <h2>Conclusion and Future Directions.</h2>
+        <p>
+            There is definitely a <em>lot</em> more to explore in these interconnected fields of mechanistic
+            interpretability, manifold learning, and machine unlearning. I am currently in the process of reading
+            extensively and gaining hands-on experience with these research directions, as they have piqued my curiosity
+            to a great extent. The potential for meaningful contributions in these areas is substantial, and the
+            intersection of these fields presents numerous opportunities for innovative research.
+        </p>
+
+        <p>
+            The convergence of interpretability and unlearning represents a particularly exciting frontier, where
+            insights from one field can inform and enhance the other. As we develop better techniques for understanding
+            and modifying the learned representations in large language models, we move closer to creating truly
+            transparent, controllable, and trustworthy AI systems.
+        </p>
+
+        <p>
+            Thanks for reading :)
+        </p>
+
+        <hr style="margin: 40px 0 20px 0; border: none; border-top: 1px solid #ddd;">
+
+        <h3>References</h3>
+        <ol style="font-size: 0.9em; line-height: 1.4;">
+            <li id="fn1">
+                <a href="https://transformer-circuits.pub/2025/attribution-graphs/methods.html"
+                    target="_blank">https://transformer-circuits.pub/2025/attribution-graphs/methods.html</a>
+                <a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a>
+            </li>
+            <li id="fn2">
+                <a href="https://neurips.cc/virtual/2024/poster/94324"
+                    target="_blank">https://neurips.cc/virtual/2024/poster/94324</a>
+                <a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a>
+            </li>
+            <li id="fn3">
+                <a href="https://arxiv.org/pdf/2503.05613" target="_blank">https://arxiv.org/pdf/2503.05613</a>
+                <a href="#ref3" title="Jump back to footnote 3 in the text.">↩</a>
+            </li>
+            <li id="fn4">
+                <a href="https://arxiv.org/abs/2501.16496" target="_blank">https://arxiv.org/abs/2501.16496</a>
+                <a href="#ref4" title="Jump back to footnote 4 in the text.">↩</a>
+            </li>
+        </ol>
+    </article>
+
+    <p class="footer">
+        <a href="../blogs.html">Back to Blogs</a>
+    </p>
+</body>
+
+</html>
