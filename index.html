@@ -367,6 +367,53 @@
             <tr>
               <td style="padding: 2.5%; width: 75%; vertical-align: middle">
                 <h3>
+                  Mechanistically Interpreting Compression in Vision-Language
+                  Models
+                </h3>
+                <br />
+                <b>Veeraraju Elluru</b>, Arth Singh, Roberto Aguero, Ajay
+                Agarwal, Debojyoti Das, Hreetam Paul
+                <br />
+                <span class="pub-meta"><em>arXiv preprint</em></span>
+                <br />
+                <span class="pub-links">
+                  <a href="https://arxiv.org/abs/2603.25035">arXiv</a>
+                </span>
+                <p>
+                  Compressed vision-language models (VLMs) are widely used to
+                  reduce memory and compute costs, making them a suitable choice
+                  for real-world deployment. However, compressing these models
+                  raises concerns about whether internal computations and
+                  safety behaviors are preserved. In this work, we use causal
+                  circuit analysis and crosscoder-based feature comparisons to
+                  examine how pruning and quantization fundamentally change the
+                  internals across representative VLMs. We observe that pruning
+                  generally keeps circuit structure intact but rotates and
+                  attenuates internal features, while quantization modifies the
+                  circuits at a higher level yet leaves the surviving features
+                  better aligned. Leveraging this insight, we also introduce
+                  VLMSafe-420, a novel benchmark that pairs harmful inputs with
+                  matched benign counterfactuals across various safety
+                  categories. Our findings show that pruning causes a sharp
+                  drop in genuine refusal behavior, suggesting that the choice
+                  of compression has safety implications.
+                </p>
+              </td>
+            </tr>
+          </table>
+          <table
+            style="
+              width: 100%;
+              border: 0px;
+              border-spacing: 0px;
+              border-collapse: separate;
+              margin-right: auto;
+              margin-left: auto;
+            "
+          >
+            <tr>
+              <td style="padding: 2.5%; width: 75%; vertical-align: middle">
+                <h3>
                   Lie Algebra-Based Semantic Flow for Incompleteness Detection
                   in Summarization
                 </h3>
