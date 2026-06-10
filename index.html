@@ -258,135 +258,70 @@
               margin-left: auto;
             ">
           <tr>
-            <td style="padding: 2.5%; width: 75%; vertical-align: middle">
-              <h3>
-                Mechanistically Interpreting Compression in Vision-Language
-                Models
-              </h3>
-              <br />
-              <b>Veeraraju Elluru</b>, Roberto Aguero, Arth Singh, Ajay
-              Agarwal, Debojyoti Das, Hreetam Paul
-              <br />
-              <span class="pub-meta"><em>AI Transparency Conference</em></span>
-              <br />
-              <span class="pub-links">
-                <a href="https://arxiv.org/abs/2603.25035">arXiv</a>
-              </span>
-              <p>
-                Compressed vision-language models (VLMs) are widely used to
-                reduce memory and compute costs, making them a suitable choice
-                for real-world deployment. However, compressing these models
-                raises concerns about whether internal computations and
-                safety behaviors are preserved. In this work, we use <b>causal
-                  circuit analysis</b> and <b>crosscoder</b>-based feature comparisons to
-                examine how pruning and quantization alter the
-                internals across representative VLMs. We observe that pruning
-                generally keeps circuit structure intact but <em>rotates</em> and
-                <em>attenuates</em> internal features, while quantization modifies the
-                circuits at a higher level yet leaves the surviving features
-                better aligned. We also introduce <b>VLMSafe-420</b>, a novel <b>multimodal</b>
-                benchmark that pairs harmful inputs with matched benign counterfactuals
-                across various safety categories. Our findings show that pruning
-                causes a sharp drop in genuine refusal behavior, suggesting that
-                the choice of compression has safety implications.
-              </p>
-            </td>
-          </tr>
-        </table>
-        <table style="
-              width: 100%;
-              border: 0px;
-              border-spacing: 0px;
-              border-collapse: separate;
-              margin-right: auto;
-              margin-left: auto;
-            ">
-          <tr>
-            <td style="padding: 2.5%; width: 75%; vertical-align: middle">
-              <h3>
-                Lie Algebra-Based Semantic Flow for Incompleteness Detection
-                in Summarization
-              </h3>
-              <br />
-              Manikandan Ravikiran, <b>Veeraraju Elluru</b>, Karrtik Iyer,
-              Prasanna Pendse, Shayan Mohanty
-              <br />
-              <span class="pub-meta"><em>PRICAI-PKAW 2025</em></span>
-              <br />
-              <span class="pub-links">
-                <a href="https://link.springer.com/chapter/10.1007/978-981-95-4575-9_5">Springer</a>
-              </span>&nbsp;/&nbsp;
-              <span class="pub-links">
-                <a href="https://www.thoughtworks.com/insights/blog/generative-ai/evaluating-LLM-generated-summaries-using-Lie-algebra-framework"
-                  target="_blank">Blog</a>
-              </span>
-
-              <p>
-                Evaluating the incompleteness of machine-generated summaries
-                remains a critical challenge in natural language generation.
-                In domains such as healthcare, education, and policy,
-                summaries that omit or distort key content can appear fluent
-                yet undermine reliability and trust. We introduce a Lie
-                Algebra-based Semantic Flow framework that treats
-                summarization as a geometric transformation in embedding
-                space, where incompleteness manifests as segments with low
-                semantic flow magnitudes. Unlike prior metrics that collapse
-                evaluation into a single similarity score, our approach
-                provides interpretable, segment-level signals through a
-                dynamic mean-scaled thresholding mechanism, requiring no
-                supervision. We evaluate our method on UniSumEval and SIGHT
-                benchmarks, showing average improvements of +10.6 macro-F1
-                over existing methods. Theoretical analysis establishes
-                rotation invariance, bounded flow magnitudes, and a
-                severity-coverage Pareto frontier that explains observed
-                trade-offs. Qualitative case studies further demonstrate that
-                our framework identifies variety of incompleteness often
-                missed by existing methods.
-              </p>
-            </td>
-          </tr>
-        </table>
-        <table style="
-              width: 100%;
-              border: 0px;
-              border-spacing: 0px;
-              border-collapse: separate;
-              margin-right: auto;
-              margin-left: auto;
-            ">
-          <tr>
-            <td style="padding: 2.5%; width: 75%; vertical-align: middle">
-              <h3>
-                Bias-Aware Machine Unlearning: Towards Fairer Vision Models
-                via Controllable Forgetting
-              </h3>
-              <br />
-              Sai Siddhartha Chary Aylapuram,
-              <strong>Veeraraju Elluru</strong>, Shivang Agarwal
-              <br />
-              <span class="pub-meta"><em>ICCV U&ME Workshop 2025</em></span>
-              <br />
-              <span class="pub-links">
-                <a href="https://arxiv.org/abs/2509.07456">arXiv</a>
-              </span>
-              &nbsp;/&nbsp;
-              <span>
-                <a href="assets/files/ICCV_U_ME_Presentation.pdf" target="_blank">slides</a>
-              </span>
-              <p>
-                Deep neural networks often rely on spurious correlations in
-                training data, resulting in biased or unfair predictions,
-                particularly in safety-critical applications. While
-                conventional bias mitigation methods typically require
-                retraining from scratch or redesigning the data pipeline,
-                recent advances in machine unlearning offer a promising
-                alternative for post-hoc model correction. In this work, we
-                explore the trifecta of efficiency, fairness, and model
-                utility post unlearning via
-                <i>Bias-Aware Machine Unlearning</i>, a paradigm that
-                selectively forgets biased samples or feature representations
-                to address various forms of bias in vision models.
-              </p>
+            <td style="padding: 0 2.5% 1.5% 2.5%; width: 100%; vertical-align: middle">
+              <ol class="publication-list">
+                <li>
+                  <h3>Mechanistic Analysis of Alignment Algorithms in Language Models</h3>
+                  <div>
+                    Aarush Sinha, Ishan Garg, <b>Veeraraju Elluru</b>, Arth
+                    Singh, Kushal Garg
+                  </div>
+                  <div class="pub-meta"><em>TBD</em></div>
+                  <span class="pub-links">
+                    <a href="https://arxiv.org/abs/2606.09850">arXiv</a>
+                  </span>
+                </li>
+                <li>
+                  <h3>
+                    Mechanistically Interpreting Compression in Vision-Language
+                    Models
+                  </h3>
+                  <div>
+                    <b>Veeraraju Elluru</b>, Roberto Aguero, Arth Singh, Ajay
+                    Agarwal, Debojyoti Das, Hreetam Paul
+                  </div>
+                  <div class="pub-meta"><em>AI Transparency Conference</em></div>
+                  <span class="pub-links">
+                    <a href="https://arxiv.org/abs/2603.25035">arXiv</a>
+                  </span>
+                </li>
+                <li>
+                  <h3>
+                    Lie Algebra-Based Semantic Flow for Incompleteness Detection
+                    in Summarization
+                  </h3>
+                  <div>
+                    Manikandan Ravikiran, <b>Veeraraju Elluru</b>, Karrtik Iyer,
+                    Prasanna Pendse, Shayan Mohanty
+                  </div>
+                  <div class="pub-meta"><em>PRICAI-PKAW 2025</em></div>
+                  <span class="pub-links">
+                    <a href="https://link.springer.com/chapter/10.1007/978-981-95-4575-9_5">Springer</a>
+                  </span>&nbsp;/&nbsp;
+                  <span class="pub-links">
+                    <a href="https://www.thoughtworks.com/insights/blog/generative-ai/evaluating-LLM-generated-summaries-using-Lie-algebra-framework"
+                      target="_blank">Blog</a>
+                  </span>
+                </li>
+                <li>
+                  <h3>
+                    Bias-Aware Machine Unlearning: Towards Fairer Vision Models
+                    via Controllable Forgetting
+                  </h3>
+                  <div>
+                    Sai Siddhartha Chary Aylapuram,
+                    <strong>Veeraraju Elluru</strong>, Shivang Agarwal
+                  </div>
+                  <div class="pub-meta"><em>ICCV U&ME Workshop 2025</em></div>
+                  <span class="pub-links">
+                    <a href="https://arxiv.org/abs/2509.07456">arXiv</a>
+                  </span>
+                  &nbsp;/&nbsp;
+                  <span class="pub-links">
+                    <a href="assets/files/ICCV_U_ME_Presentation.pdf" target="_blank">slides</a>
+                  </span>
+                </li>
+              </ol>
             </td>
           </tr>
         </table>

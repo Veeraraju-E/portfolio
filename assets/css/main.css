@@ -114,6 +114,29 @@ h3 {
   font-size: 0.98em;
   margin-bottom: 2px;
 }
+.publication-list {
+  counter-reset: publication;
+  line-height: 1.35;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.publication-list li {
+  counter-increment: publication;
+  margin-bottom: 14px;
+  padding-left: 34px;
+  position: relative;
+}
+.publication-list li:last-child {
+  margin-bottom: 0;
+}
+.publication-list li::before {
+  content: "[" counter(publication) "]";
+  font-weight: 700;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
 .pub-links a {
   margin-right: 10px;
   color: #1772d0;
