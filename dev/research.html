@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Research and publications by Veeraraju Elluru." />
+  <title>Research - Veeraraju Elluru</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">skip to content</a>
+  <div class="site">
+    <header class="site-header">
+      <a class="wordmark" href="index.html">veeraraju</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html"><span class="key">[h]</span> home</a>
+        <a href="research.html" aria-current="page"><span class="key">[r]</span> research</a>
+        <a href="projects.html"><span class="key">[p]</span> projects</a>
+        <a href="writing.html"><span class="key">[w]</span> writing</a>
+        <a href="about.html"><span class="key">[a]</span> about</a>
+        <button class="command-button" type="button" data-open-palette><span class="key">[/]</span> jump</button>
+      </nav>
+    </header>
+
+    <main id="content">
+      <header class="page-head">
+        <p class="prompt">ls ./research</p>
+        <h1>Research</h1>
+      </header>
+      <section class="section">
+        <h2>Directions</h2>
+        <dl class="split">
+          <dt>01 / internals</dt>
+          <dd>Reverse-engineering learned behaviors through circuits and representations.</dd>
+        </dl>
+        <dl class="split">
+          <dt>02 / alignment</dt>
+          <dd>Understanding and mitigating misalignment.</dd>
+        </dl>
+        <dl class="split">
+          <dt>03 / safety</dt>
+          <dd>Reducing anthropomorphic risks in machines.</dd>
+        </dl>
+      </section>
+
+      <section class="section">
+        <h2>Publications</h2>
+        <article class="item" id="alignment">
+          <div class="item-top">
+            <h3><span class="feed-index">[01]</span> Mechanistic Analysis of Alignment Algorithms in Language Models
+            </h3>
+            <span class="meta">pre-print · 2026</span>
+          </div>
+          <p>Aarush Sinha, Ishan Garg, <strong>Veeraraju Elluru</strong>, Arth Singh, Kushal Garg</p>
+          <div class="inline-links"><a href="https://arxiv.org/abs/2606.09850">[arXiv]</a></div>
+        </article>
+
+        <article class="item" id="compression">
+          <div class="item-top">
+            <h3><span class="feed-index">[02]</span> Mechanistically Interpreting Compression in Vision-Language Models
+            </h3>
+            <span class="meta">ICML MI Workshop · 2026</span>
+          </div>
+          <p><strong>Veeraraju Elluru</strong>, Roberto Aguero, Arth Singh, Ajay Agarwal, Debojyoti Das, Hreetam Paul
+          </p>
+          <div class="inline-links"><a href="https://arxiv.org/abs/2603.25035">[arXiv]</a></div>
+        </article>
+
+        <article class="item" id="lie-algebra">
+          <div class="item-top">
+            <h3><span class="feed-index">[03]</span> Lie Algebra-Based Semantic Flow for Incompleteness Detection</h3>
+            <span class="meta">PRICAI-PKAW · 2025</span>
+          </div>
+          <p>Manikandan Ravikiran, <strong>Veeraraju Elluru</strong>, Karrtik Iyer, Prasanna Pendse, Shayan Mohanty</p>
+          <div class="inline-links">
+            <a href="https://link.springer.com/chapter/10.1007/978-981-95-4575-9_5">[paper]</a>
+            <a
+              href="https://www.thoughtworks.com/insights/blog/generative-ai/evaluating-LLM-generated-summaries-using-Lie-algebra-framework">[article]</a>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="item-top">
+            <h3><span class="feed-index">[04]</span> Bias-Aware Machine Unlearning</h3>
+            <span class="meta">ICCV U&amp;ME · 2025</span>
+          </div>
+          <p>Sai Siddhartha Chary Aylapuram, <strong>Veeraraju Elluru</strong>, Shivang Agarwal</p>
+          <div class="inline-links">
+            <a href="https://arxiv.org/abs/2509.07456">[arXiv]</a>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="item-top">
+            <h3><span class="feed-index">[05]</span> Unsupervised Latent Representations for Cattle Image Segmentation
+            </h3>
+            <span class="meta">ANSC Journal · 2025</span>
+          </div>
+          <p><strong>Veeraraju Elluru</strong>, Ahmed Sallam, Anderson Alves, Tiago Bresolin</p>
+          <div class="inline-links"><a
+              href="https://www.sciencedirect.com/science/article/pii/S2772283X25007782">[paper]</a></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Veeraraju Elluru</p>
+      <p><a href="mailto:veerarajuel@gmail.com">veerarajuel@gmail.com</a></p>
+    </footer>
+  </div>
+
+  <div class="palette" data-palette hidden>
+    <div class="palette-panel" role="dialog" aria-modal="true" aria-label="Quick navigation">
+      <div class="palette-title"><span>jump to</span><button class="command-button" type="button"
+          data-close-palette>esc</button></div>
+      <ul class="palette-list">
+        <li><a href="index.html">Home <span>h</span></a></li>
+        <li><a href="research.html">Research &amp; publications <span>r</span></a></li>
+        <li><a href="projects.html">Projects <span>p</span></a></li>
+        <li><a href="writing.html">Writing <span>w</span></a></li>
+        <li><a href="about.html">About &amp; contact <span>a</span></a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

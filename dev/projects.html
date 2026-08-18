@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Selected machine learning and computer science projects by Veeraraju Elluru." />
+  <title>Projects - Veeraraju Elluru</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">skip to content</a>
+  <div class="site">
+    <header class="site-header">
+      <a class="wordmark" href="index.html">veeraraju</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html"><span class="key">[h]</span> home</a>
+        <a href="research.html"><span class="key">[r]</span> research</a>
+        <a href="projects.html" aria-current="page"><span class="key">[p]</span> projects</a>
+        <a href="writing.html"><span class="key">[w]</span> writing</a>
+        <a href="about.html"><span class="key">[a]</span> about</a>
+        <button class="command-button" type="button" data-open-palette><span class="key">[/]</span> jump</button>
+      </nav>
+    </header>
+
+    <main id="content">
+      <header class="page-head">
+        <p class="prompt">cat ./projects.md</p>
+        <h1>Projects</h1>
+        <p class="lede">Stuff I've tinkered with.</p>
+      </header>
+
+      <section class="section">
+        <h2>Machine learning</h2>
+        <article class="item" id="multilayer-nlas">
+          <div class="item-top">
+            <h3>Multilayer NLAs</h3>
+            <span class="meta">interp · in progress</span>
+          </div>
+          <p>use multi-layer inputs for your natural language autoencoders.</p>
+          <div class="inline-links"><a
+              href="https://www.lesswrong.com/editPost?postId=Jtm42Jjg4sCpnfbrC&key=981ed5279bc927788d53aff3d1882b">[blog]</a>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="item-top">
+            <h3>Fantastic Biases and Where to Find Them</h3>
+            <span class="meta">interp</span>
+          </div>
+          <p>mechanistic study of racial and gender bias in gpt-2 and gpt-neo using linear probes, activation
+            patching, attribution patching, and circuit tracing. steered model outputs to show reduced bias without
+            MMLU degredation.</p>
+          <div class="inline-links"><a href="https://github.com/Veeraraju-E/mech-interp-bias/">[source]</a></div>
+        </article>
+
+        <article class="item">
+          <div class="item-top">
+            <h3>3D Scene Reconstruction</h3>
+            <span class="meta">vision</span>
+          </div>
+          <p>an end-to-end tour through SfM, MVS, GANs, neural radiance fields, and gaussian splatting for
+            reconstructing scenes from images.</p>
+          <div class="inline-links">
+            <a href="https://github.com/majisouvik26/3d-scene-reconstruction">[source]</a>
+            <a href="https://huggingface.co/spaces/adirathor07/snap2scene">[demo]</a>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="item-top">
+            <h3>Face Recognition on LFW</h3>
+            <span class="meta">classical ML</span>
+          </div>
+          <p>a comparative analysis of traditional machine-learning classifier systems for face recognition on the LFW
+            dataset.</p>
+          <div class="inline-links">
+            <a href="https://github.com/majisouvik26/Face_Recognition-PRML_Course_Project">[source]</a>
+            <a href="https://huggingface.co/spaces/souvikmaji22/lfw_face_recognition">[demo]</a>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="item-top">
+            <h3>Multimodal Stress Counselor</h3>
+            <span class="meta">no public version</span>
+          </div>
+          <p>Moshi-based duplex conversational agent that utilizes audio (micrsoft S5) and visual (QuantumConv) contexts
+            to provide real-time stress counseling.</p>
+        </article>
+
+        <article class="item">
+          <div class="item-top">
+            <h3>FastSim with CERN</h3>
+            <span class="meta">no public version</span>
+          </div>
+          <p>flow-based, diffeomorphic generative models for deep-learning based particle-shower simulation in
+            cylindirical coordinates for high-energy physics.
+          </p>
+        </article>
+      </section>
+
+      <section class="section">
+        <h2>Core systems</h2>
+        <article class="item">
+          <div class="item-top">
+            <h3>Distributed Program Execution</h3>
+            <span class="meta">distributed systems</span>
+          </div>
+          <p>byzantine fault tolerance in peer-to-peer networks, simulated with OMNeT++.</p>
+          <div class="inline-links"><a href="https://github.com/Veeraraju-E/distributed-program-execution">[source]</a>
+          </div>
+        </article>
+        <article class="item">
+          <div class="item-top">
+            <h3>Huffman Encoder</h3>
+            <span class="meta">algorithms</span>
+          </div>
+          <p>a mini file-compression system built around Huffman coding.</p>
+          <div class="inline-links"><a href="https://github.com/VeerarajuElluru/Huffman-Coding">[source]</a></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Veeraraju Elluru</p>
+      <p><a href="https://github.com/Veeraraju-E">[more on github]</a></p>
+    </footer>
+  </div>
+
+  <div class="palette" data-palette hidden>
+    <div class="palette-panel" role="dialog" aria-modal="true" aria-label="Quick navigation">
+      <div class="palette-title"><span>jump to</span><button class="command-button" type="button"
+          data-close-palette>esc</button></div>
+      <ul class="palette-list">
+        <li><a href="index.html">Home <span>h</span></a></li>
+        <li><a href="research.html">Research &amp; publications <span>r</span></a></li>
+        <li><a href="projects.html">Projects <span>p</span></a></li>
+        <li><a href="writing.html">Writing <span>w</span></a></li>
+        <li><a href="about.html">About &amp; contact <span>a</span></a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

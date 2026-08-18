@@ -1,0 +1,61 @@
+:root {
+  color-scheme: dark;
+  --bg: #11110f;
+  --surface: #181816;
+  --text: #d8d8d0;
+  --muted: #85857d;
+  --accent: #c5f467;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.toggle {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toggle a {
+  display: block;
+  padding: 6px 10px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.toggle a[aria-selected="true"] {
+  color: var(--accent);
+  background: var(--surface);
+}
+
+.toggle a::before {
+  content: "  ";
+  white-space: pre;
+}
+
+.toggle a[aria-selected="true"]::before {
+  content: "> ";
+  color: var(--accent);
+}

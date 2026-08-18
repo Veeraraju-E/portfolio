@@ -4,10 +4,28 @@
     <loc>https://veeraraju-e.github.io/portfolio/</loc>
   </url>
   <url>
-    <loc>https://veeraraju-e.github.io/portfolio/projects.html</loc>
+    <loc>https://veeraraju-e.github.io/portfolio/research/</loc>
   </url>
   <url>
-    <loc>https://veeraraju-e.github.io/portfolio/blogs.html</loc>
+    <loc>https://veeraraju-e.github.io/portfolio/research/projects.html</loc>
+  </url>
+  <url>
+    <loc>https://veeraraju-e.github.io/portfolio/research/blogs.html</loc>
+  </url>
+  <url>
+    <loc>https://veeraraju-e.github.io/portfolio/dev/</loc>
+  </url>
+  <url>
+    <loc>https://veeraraju-e.github.io/portfolio/dev/research.html</loc>
+  </url>
+  <url>
+    <loc>https://veeraraju-e.github.io/portfolio/dev/projects.html</loc>
+  </url>
+  <url>
+    <loc>https://veeraraju-e.github.io/portfolio/dev/writing.html</loc>
+  </url>
+  <url>
+    <loc>https://veeraraju-e.github.io/portfolio/dev/about.html</loc>
   </url>
   <url>
     <loc>https://veeraraju-e.github.io/portfolio/blogs/llm-internals.html</loc>
