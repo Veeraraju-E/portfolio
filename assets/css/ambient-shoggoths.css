@@ -1,0 +1,156 @@
+body {
+  isolation: isolate;
+}
+
+body > *:not(.shoggoth-ambient):not(script) {
+  position: relative;
+  z-index: 1;
+}
+
+.shoggoth-ambient {
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  user-select: none;
+  z-index: 0;
+}
+
+.shoggoth-ambient__character {
+  --shoggoth-size: 120px;
+  --shoggoth-opacity: 0.95;
+  --shoggoth-gutter: 24px;
+  --shoggoth-tilt: 0deg;
+  bottom: var(--shoggoth-bottom, auto);
+  height: var(--shoggoth-size);
+  left: auto;
+  opacity: var(--shoggoth-opacity);
+  position: absolute;
+  right: auto;
+  top: var(--shoggoth-top, auto);
+  transform: rotate(var(--shoggoth-tilt));
+  width: var(--shoggoth-size);
+}
+
+.shoggoth-ambient__character[data-side="left"] {
+  left: calc(50% - 400px - var(--shoggoth-size) - var(--shoggoth-gutter));
+}
+
+.shoggoth-ambient__character[data-side="right"] {
+  right: calc(50% - 400px - var(--shoggoth-size) - var(--shoggoth-gutter));
+}
+
+.shoggoth-svg {
+  display: block;
+  height: 100%;
+  overflow: visible;
+  width: 100%;
+}
+
+.shoggoth-ambient__character[data-side="right"][data-face="in"] .shoggoth-svg,
+.shoggoth-ambient__character[data-side="left"][data-face="away"] .shoggoth-svg {
+  transform: scaleX(-1);
+}
+
+.shoggoth-ambient:not(.is-static) .shoggoth-ambient__character[data-side="left"] {
+  animation: shoggoth-dally-left var(--shoggoth-duration, 24s) ease-in-out infinite;
+  animation-delay: var(--shoggoth-delay, 0s);
+}
+
+.shoggoth-ambient:not(.is-static) .shoggoth-ambient__character[data-side="right"] {
+  animation: shoggoth-dally-right var(--shoggoth-duration, 24s) ease-in-out infinite;
+  animation-delay: var(--shoggoth-delay, 0s);
+}
+
+.shoggoth-svg .eye--blink {
+  animation: shoggoth-blink var(--blink-duration, 6.5s) ease-in-out infinite;
+  animation-delay: var(--blink-delay, 0s);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.shoggoth-svg .pupil {
+  animation: shoggoth-gaze 8.5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes shoggoth-dally-left {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--shoggoth-tilt));
+  }
+
+  28% {
+    transform: translate3d(-26px, -9px, 0) rotate(calc(var(--shoggoth-tilt) - 3deg));
+  }
+
+  57% {
+    transform: translate3d(-8px, 7px, 0) rotate(calc(var(--shoggoth-tilt) + 2deg));
+  }
+
+  80% {
+    transform: translate3d(-22px, -3px, 0) rotate(calc(var(--shoggoth-tilt) - 1.5deg));
+  }
+}
+
+@keyframes shoggoth-dally-right {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--shoggoth-tilt));
+  }
+
+  28% {
+    transform: translate3d(26px, -8px, 0) rotate(calc(var(--shoggoth-tilt) + 3deg));
+  }
+
+  57% {
+    transform: translate3d(8px, 8px, 0) rotate(calc(var(--shoggoth-tilt) - 2deg));
+  }
+
+  80% {
+    transform: translate3d(22px, -2px, 0) rotate(calc(var(--shoggoth-tilt) + 1.5deg));
+  }
+}
+
+@keyframes shoggoth-blink {
+  0%,
+  86%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  92%,
+  96% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes shoggoth-gaze {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  40% {
+    transform: translate(0.8px, -0.45px);
+  }
+
+  72% {
+    transform: translate(-0.7px, 0.4px);
+  }
+}
+
+@media (max-width: 860px) {
+  .shoggoth-ambient {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shoggoth-ambient__character,
+  .shoggoth-svg .eye--blink,
+  .shoggoth-svg .pupil {
+    animation: none !important;
+  }
+}

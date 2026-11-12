@@ -112,18 +112,18 @@ h3 {
 .pub-meta {
   color: #b16226;
   font-size: 0.98em;
-  margin-bottom: 2px;
+  margin-bottom: 0;
 }
 .publication-list {
   counter-reset: publication;
-  line-height: 1.35;
+  line-height: 1.25;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .publication-list li {
   counter-increment: publication;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   padding-left: 34px;
   position: relative;
 }
